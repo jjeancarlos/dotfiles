@@ -1,0 +1,12 @@
+{
+    "workbench.colorTheme": "Noctis Obscuro",
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": true,
+    "editor.defaultFormatter": "GitHub.copilot-chat",
+    "editor.wordWrap": "on",
+    "files.autoSave": "afterDelay",
+    "workbench.editor.autoLockGroups": {
+        "workbench.editor.chatSession": false
+    },
+    "workbench.startupEditor": "none",
+}  

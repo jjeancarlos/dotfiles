@@ -1,0 +1,43 @@
+{
+    // Fonte
+    "font_face": "PlemolJP Console NF",
+    "font_size": 11,
+
+    // Pacotes desabilitados
+    "ignored_packages":
+    [
+        "Vintage",
+    ],
+
+    // ---- AUTO-SAVE ----
+    // Salva automaticamente ao trocar de aba/janela
+    "save_on_focus_lost": true,
+    // Salva de forma mais segura (usa arquivo temporário antes de gravar)
+    "atomic_save": true,
+    // Plugin AutoSave (se instalado via Package Control)
+    "autosave_enabled": true,
+    "autosave_interval": 2,
+    "autosave_save_only_on_focus_lost": false,
+
+    // ---- TEMA / VISUAL ----
+    // Tema adaptativo com efeito "frosted"
+    "theme": "auto",
+    // Esquema de cor (você pode trocar por outro, ex: Monokai, Mariana, etc.)
+    "color_scheme": "osaka.sublime-color-scheme",
+    "adaptive_accent": "blue",
+
+    // Barras e navegação
+    "overlay_scroll_bars": "disable",
+    "draw_minimap_border": true,
+
+    // ---- WORKAROUND TRANSPARÊNCIA ----
+    // Isso simula transparência no fundo do editor
+    // (nem todos color schemes aceitam rgba, se não funcionar
+    // precisa criar um .sublime-color-scheme personalizado)
+    "background": "rgba(40, 40, 40, 0.7)",
+    "index_files": true,
+    "dark_color_scheme": "Packages/Theme - Cyanide/Twilightcyanide - Black.tmTheme",
+    "light_color_scheme": "Packages/Theme - Cyanide/Cyanide - Wood.tmTheme",
+    "dark_theme": "Adaptive.sublime-theme",
+    "light_theme": "Adaptive.sublime-theme",
+}
