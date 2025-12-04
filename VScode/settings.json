@@ -1,7 +1,4 @@
 {
-    // ------------------------
-    // Aparência e Editor
-    // ------------------------
     "workbench.colorTheme": "Noctis Obscuro",
     "editor.wordWrap": "on",
     "files.autoSave": "afterDelay",
@@ -11,37 +8,5 @@
     "workbench.editor.autoLockGroups": {
         "workbench.editor.chatSession": false
     },
-    "workbench.startupEditor": "none",
-
-    // ------------------------
-    // Ruby + Bundler + RuboCop + LSP
-    // ------------------------
-
-    // Força o Ruby LSP a usar bundler (obrigatório para rubocop-lsp do Gemfile)
-    "rubyLsp.useBundler": true,
-
-    // Ativa recursos do Ruby LSP
-    "rubyLsp.enabledFeatures": {
-        "diagnostics": true,
-        "documentHighlights": true,
-        "documentSymbols": true,
-        "foldingRanges": true,
-        "formatting": true,
-        "hover": true,
-        "inlayHint": true,
-        "codeActions": true,
-        "completion": true,
-        "semanticHighlighting": true,
-        "rubocop": true     // <- IMPORTANTE para usar rubocop-lsp
-    },
-
-    // Usa o RuboCop como formatador quando o Ruby LSP pedir formatação
-    "ruby.format": "rubocop",
-
-    // Não defina ruby.rubocop.path — bundler vai cuidar disso sozinho
-
-    // ------------------------
-    // Terminal / Shell
-    // ------------------------
-    "terminal.integrated.defaultProfile.windows": "PowerShell"
+    "workbench.startupEditor": "none"
 }
