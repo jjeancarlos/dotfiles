@@ -8,5 +8,8 @@
     "workbench.editor.autoLockGroups": {
         "workbench.editor.chatSession": false
     },
-    "workbench.startupEditor": "none"
+    "workbench.startupEditor": "none",
+    "ruby.rubocop.useBundler": true,
+    "ruby.interpreter.commandPath": "C:\\Ruby34-x64\\bin\\ruby.exe",
+    "ruby.bundlePath": "C:\\Ruby34-x64\\bin\\bundle.bat"
 }
