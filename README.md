@@ -61,8 +61,7 @@ O script `install.sh` automatiza a atualização do sistema, instalação de fer
 
 Para obter o esquema de cores **Neon**, adicione o seguinte bloco ao seu arquivo `settings.json` do Windows Terminal, dentro da lista `"schemes"`:
 
-\<details\>
-\<summary\>Clique para expandir o JSON do Tema Neon\</summary\>
+
 
 ```json
 {
@@ -90,7 +89,6 @@ Para obter o esquema de cores **Neon**, adicione o seguinte bloco ao seu arquivo
 }
 ```
 
-\</details\>
 
 -----
 
