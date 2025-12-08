@@ -1,0 +1,39 @@
+# Arquivos pessoais que NÃO devem ser versionados
+.bashrc_local
+.bash_aliases_private
+.bash_history
+.zsh_history
+.bash_profile_local
+
+# Segurança Crítica (Fail-safe)
+.ssh/
+id_rsa
+id_ed25519
+*.pem
+*.key
+*.secret
+
+# Cache e arquivos temporários
+.cache/
+*.swp
+*.swo
+*~
+*.log
+*.bak
+*.backup
+*.backup_*
+
+# Credenciais e Variaveis de Ambiente
+.env
+.env.local
+.env.*.local
+
+# IDE/Editor (Configurações de workspace locais)
+.vscode/
+.idea/
+*.code-workspace
+
+# Sistema Operacional
+.DS_Store
+Thumbs.db
+desktop.ini
