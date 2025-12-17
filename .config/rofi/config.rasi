@@ -1,0 +1,8 @@
+configuration {
+
+    font: "PlemolJP Console NF 11";
+}
+
+//@theme "/usr/share/rofi/themes/DarkBlue.rasi"
+
+@theme "/usr/share/rofi/themes/lb.rasi"

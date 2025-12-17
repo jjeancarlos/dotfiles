@@ -1,0 +1,111 @@
+{
+    "layer": "top",
+    "position": "top",
+    "height": 34,
+    "spacing": 4,
+    "margin-top": 6,
+    "margin-left": 10,
+    "margin-right": 10,
+    
+    // Módulos da Esquerda
+    "modules-left": [
+        "hyprland/workspaces",
+        "hyprland/window"
+    ],
+
+    // Módulos do Centro (Relógio em destaque)
+    "modules-center": [
+        "clock"
+    ],
+
+    // Módulos da Direita
+    "modules-right": [
+        "pulseaudio",
+        "network",
+        "cpu",
+        "memory",
+        "temperature",
+        "tray",
+        "custom/power"
+    ],
+
+    // --- Configuração dos Módulos ---
+
+    "hyprland/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": true,
+        "format": "{name}",
+        "on-click": "activate"
+    },
+
+    "hyprland/window": {
+        "format": "{title}",
+        "max-length": 100,
+        "separate-outputs": true
+    },
+
+    "tray": {
+        "icon-size": 18,
+        "spacing": 10
+    },
+
+    "clock": {
+        "format": "{:%H:%M}  ",
+        "format-alt": "{:%A, %d %B, %Y}  ",
+        "tooltip-format": "<tt><small>{calendar}</small></tt>"
+    },
+
+    "cpu": {
+        "format": "{usage}% ",
+        "tooltip": true
+    },
+
+    "memory": {
+        "format": "{}% "
+    },
+
+    "temperature": {
+        "critical-threshold": 80,
+        "format": "{temperatureC}°C {icon}",
+        "format-icons": ["", "", ""]
+    },
+
+    "pulseaudio": {
+        "format": "{volume}% {icon}",
+        "format-bluetooth": "{volume}% {icon}",
+        "format-muted": "Muted ",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        },
+        "on-click": "pavucontrol"
+    },
+
+    "custom/power": {
+        "format" : "⏻ ",
+        "tooltip": false,
+        "on-click": "nwg-bar" 
+        // Se não tiver wlogout, troque por "shutdown now" ou seu script de saida
+    },
+    
+    "network": {
+    "interface": "en*",  // Opcional: fixa em interfaces cabeadas (ex: enpXs0, eth0). Veja o nome exato com `ip link`
+    "format-wifi": "",   // Esconde completamente se por acaso detectar WiFi (não vai acontecer no seu caso)
+    "format-ethernet": "󰲁 ",  // Ícone moderno e bonito de rede cabeada (de Material Design Icons via Nerd Fonts)
+    // Alternativas de ícones (teste qual gosta mais):
+    // "format-ethernet": " ",   // Ícone clássico de plug RJ45
+    // "format-ethernet": "󰈀 ",   // Outro ícone de Ethernet conectado
+    // "format-ethernet": "󰱔 ",   // Ícone verde de conexão
+    "format-linked": "󰌙 ",     // Cabo plugado mas sem IP (raro)
+    "format-disconnected": "󰲜 ", // Ícone de desconectado (ex: cabo solto)
+    "format-disabled": "󰌐 ",
+    "tooltip-format-ethernet": "Ethernet ({ifname})\nIP: {ipaddr}\n↓ {bandwidthDownBits} ↑ {bandwidthUpBits}",
+    "tooltip-format-disconnected": "Desconectado",
+    "on-click": "nm-connection-editor"  // Abre o gerenciador de redes do NetworkManager
+    }
+}
