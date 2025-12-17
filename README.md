@@ -1,67 +1,68 @@
 # 🔧 Config
 
-Este repositório contém minhas configurações pessoais de ambiente de desenvolvimento (WSL/Ubuntu), editores de texto e terminal. O objetivo é automatizar a configuração de uma nova máquina para deixá-la pronta para uso rapidamente, com foco em segurança e portabilidade.
+Este repositório contém minhas configurações pessoais de ambiente de desenvolvimento (WSL/Ubuntu e Arch Linux), editores de texto e terminal. O objetivo é automatizar a configuração de uma nova máquina para deixá-la pronta para uso rapidamente, com foco em segurança e portabilidade.
 
 ## 📂 Estrutura do Repositório
 
 ```text
 dotfiles/
-├── install.sh           # Script de automação (Instala pacotes, linguagens e extensões)
-├── README.md            # Este arquivo
-├── .bashrc              # Configurações do shell (Alias, Paths, etc)
+├── .config/             # Configurações de interface gráfica (WM, Terminais, etc.)
+│   ├── hypr/            # Hyprland (Tiling Window Manager)
+│   ├── kitty/           # Terminal moderno acelerado por GPU
+│   ├── nwg-bar/         # Menu de saída GTK
+│   ├── rofi/            # Launcher de apps e gerenciador de janelas
+│   ├── swaylock/        # Tela de bloqueio estilizada
+│   └── waybar/          # Barra de status altamente personalizável
 ├── OMP/                 # Temas do Oh My Posh
-│   ├── amro.omp.json
-│   └── emodipt-extend.omp.json
 ├── SublimeText/         # Configurações do Sublime Text
-│   ├── osaka.sublime-color-scheme
-│   └── *.sublime-settings
-└── VScode/              # Configurações do VS Code
-    ├── extensions.txt   # Lista de backup das extensões
-    └── settings.json    # Configurações de usuário (JSON)
-````
+├── VScode/              # Configurações do VS Code
+├── .bashrc              # Configurações do shell
+├── install-arch.sh      # Script de setup focado em Arch Linux
+├── install.sh           # Script de setup focado em WSL/Ubuntu
+├── pkglist.txt          # Lista consolidada de pacotes (Pacman/AUR)
+└── README.md            # Documentação do projeto
 
------
+```
 
-## 🚀 Instalação Automática (Recomendado)
+---
 
-O script `install.sh` automatiza a atualização do sistema, instalação de ferramentas (Rust, Ruby, etc), configura as extensões do VS Code e ajusta permissões do WSL.
+## 🚀 Instalação Automática
 
-> **🔒 Privacidade:** O script foi ajustado para **não** conter dados sensíveis fixos. Durante a execução, ele solicitará interativamente seu **Nome** e **E-mail** para configurar o Git.
+### 1. No WSL ou Ubuntu
 
-1.  **Clone o repositório:**
+O script `install.sh` foca em pacotes `apt`, ferramentas de dev (Rust, Ruby) e ajustes de integração com o Windows.
 
-    ```bash
-    git clone https://github.com/jjeancarlos/dotfiles.git
-    ```
-    ```bash
-    cd dotfiles
-    ```
+```bash
+chmod +x install.sh && ./install.sh
 
-2.  **Dê permissão de execução e rode o script:**
+```
 
-    ```bash
-    chmod +x install.sh
-    ./install.sh
-    ```
+### 2. No Arch Linux (Nativo)
 
-3.  **⚠️ Passo Crítico (WSL):**
-    O script edita o arquivo `/etc/wsl.conf` para permitir o uso da área de transferência (`clip.exe`) e integração de PATH. Para que isso funcione, você **deve** reiniciar o subsistema completamente.
+O script `install-arch.sh` é voltado para a instalação do ambiente desktop e utilitários de sistema via `pacman` e `yay`.
 
-    Abra o **PowerShell** no Windows e rode:
+```bash
+chmod +x install-arch.sh && ./install-arch.sh
 
-    ```powershell
-    wsl --shutdown
-    ```
+```
 
-    Depois, abra seu terminal WSL novamente.
+> **⚠️ Passo Crítico (WSL):** Se estiver no WSL, após rodar o script, abra o **PowerShell** e execute `wsl --shutdown` para aplicar as mudanças de rede e sistema.
 
------
+---
+
+## 🐧 Arch Linux & Hyprland
+
+Adicionei suporte para uma instalação completa de ambiente gráfico baseado em **Wayland**:
+
+* **`.config/`**: Contém os arquivos de "rice" (estética). Aqui estão as definições de atalhos do **Hyprland**, o visual da **Waybar** e a configuração do terminal **Kitty**.
+* **`pkglist.txt`**: Um arquivo de texto contendo todos os pacotes essenciais para o sistema. Isso facilita a migração: em vez de instalar um por um, o script lê esta lista.
+* **`install-arch.sh`**: Script que automatiza a leitura do `pkglist.txt`, instala um AUR helper (como o `yay`) e cria os links simbólicos das pastas de configuração para o seu `~/.config`.
+
+---
 
 ## 🎨 Windows Terminal (Configuração Manual)
 
 Para obter o esquema de cores **Neon**, adicione o seguinte bloco ao seu arquivo `settings.json` do Windows Terminal, dentro da lista `"schemes"`:
-
-
 
 ```json
 {
@@ -87,42 +88,35 @@ Para obter o esquema de cores **Neon**, adicione o seguinte bloco ao seu arquivo
     "white": "#C7C7C7",
     "yellow": "#FFFC7E"
 }
+
 ```
 
-
------
+---
 
 ## 🛠️ Detalhes das Configurações
 
 ### Visual Studio Code
 
-O script de instalação já cuida das extensões e tenta criar o link simbólico para o `settings.json`.
-
-1.  **Tema:** [Noctis Obscuro](https://marketplace.visualstudio.com/items?itemName=liviuschera.noctis)
-2.  **Configuração:** O arquivo `VScode/settings.json` é linkado automaticamente para:
-      - *WSL (Server):* `~/.vscode-server/data/Machine/settings.json`
-      - *Linux Nativo:* `~/.config/Code/User/settings.json`
+* **Tema:** [Noctis Obscuro](https://marketplace.visualstudio.com/items?itemName=liviuschera.noctis)
+* **Links Simbólicos:** O script vincula automaticamente o `VScode/settings.json` para o diretório correto no WSL ou Linux Nativo.
 
 ### Sublime Text
 
-  - **Tema:** Osaka
-  - **Diretório dos arquivos:** `SublimeText/`
-  - Para instalar manualmente, mova os arquivos desta pasta para:
-      - Linux/WSL: `~/.config/sublime-text/Packages/User`
-      - Windows: `%APPDATA%\Sublime Text\Packages\User`
+* **Tema:** Osaka
+* **Localização:** Arquivos em `SublimeText/` devem ser linkados para `Packages/User`.
 
 ### Shell (Bash + Oh My Posh)
 
-  - **Portabilidade:** O `.bashrc` utiliza a variável `$HOME` em vez de caminhos fixos, permitindo que outros usuários utilizem estas configurações.
-  - **Integração:** Alias configurados para chamar executáveis do Windows (`subl.exe`, `code`) de dentro do WSL.
-  - **Visual:** O tema utilizado é o `amro.omp.json` localizado na pasta `OMP/`.
+* **Portabilidade:** O `.bashrc` utiliza a variável `$HOME` em vez de caminhos fixos.
+* **Visual:** O tema padrão é o `amro.omp.json` dentro da pasta `OMP/`.
 
------
+---
 
 ## 📝 Backup Manual de Extensões
 
-Caso o script falhe ou você queira reinstalar apenas as extensões do VS Code manualmente usando o arquivo de texto:
+Para reinstalar as extensões do VS Code manualmente:
 
 ```bash
 cat VScode/extensions.txt | xargs -n 1 code --install-extension
+
 ```
