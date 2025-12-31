@@ -1,6 +1,8 @@
 # 🔧 Config
 
-Este repositório contém minhas configurações pessoais de ambiente de desenvolvimento (WSL/Ubuntu e Arch Linux), editores de texto e terminal. O objetivo é automatizar a configuração de uma nova máquina para deixá-la pronta para uso rapidamente, com foco em segurança e portabilidade.
+Este repositório contém minhas configurações pessoais de ambiente de desenvolvimento (WSL/Ubuntu e Arch Linux), editores de texto e terminal. O objetivo é automatizar a configuração de uma nova máquina para deixá-la pronta para uso rapidamente, com foco em segurança, produtividade e portabilidade.
+
+---
 
 ## 📂 Estrutura do Repositório
 
@@ -12,17 +14,17 @@ dotfiles/
 │   ├── nwg-bar/         # Menu de saída GTK
 │   ├── rofi/            # Launcher de apps e gerenciador de janelas
 │   ├── swaylock/        # Tela de bloqueio estilizada
-│   └── waybar/          # Barra de status altamente personalizável
+│   ├── waybar/          # Barra de status altamente personalizável
+│   └── zsh/             # Configuração do Zsh (shell principal no Arch)
 ├── OMP/                 # Temas do Oh My Posh
 ├── SublimeText/         # Configurações do Sublime Text
 ├── VScode/              # Configurações do VS Code
-├── .bashrc              # Configurações do shell
+├── .bashrc              # Configurações do Bash (WSL / fallback)
 ├── install-arch.sh      # Script de setup focado em Arch Linux
 ├── install.sh           # Script de setup focado em WSL/Ubuntu
 ├── pkglist.txt          # Lista consolidada de pacotes (Pacman/AUR)
 └── README.md            # Documentação do projeto
-
-```
+````
 
 ---
 
@@ -31,10 +33,10 @@ dotfiles/
 ### 1. No WSL ou Ubuntu
 
 O script `install.sh` foca em pacotes `apt`, ferramentas de dev (Rust, Ruby) e ajustes de integração com o Windows.
+Neste ambiente, o **Bash é mantido como shell padrão**.
 
 ```bash
 chmod +x install.sh && ./install.sh
-
 ```
 
 ### 2. No Arch Linux (Nativo)
@@ -43,7 +45,6 @@ O script `install-arch.sh` é voltado para a instalação do ambiente desktop e 
 
 ```bash
 chmod +x install-arch.sh && ./install-arch.sh
-
 ```
 
 > **⚠️ Passo Crítico (WSL):** Se estiver no WSL, após rodar o script, abra o **PowerShell** e execute `wsl --shutdown` para aplicar as mudanças de rede e sistema.
@@ -54,9 +55,59 @@ chmod +x install-arch.sh && ./install-arch.sh
 
 Adicionei suporte para uma instalação completa de ambiente gráfico baseado em **Wayland**:
 
-* **`.config/`**: Contém os arquivos de "rice" (estética). Aqui estão as definições de atalhos do **Hyprland**, o visual da **Waybar** e a configuração do terminal **Kitty**.
-* **`pkglist.txt`**: Um arquivo de texto contendo todos os pacotes essenciais para o sistema. Isso facilita a migração: em vez de instalar um por um, o script lê esta lista.
-* **`install-arch.sh`**: Script que automatiza a leitura do `pkglist.txt`, instala um AUR helper (como o `yay`) e cria os links simbólicos das pastas de configuração para o seu `~/.config`.
+* **`.config/`**: Contém os arquivos de "rice" (estética). Aqui estão as definições de atalhos do **Hyprland**, o visual da **Waybar**, do terminal **Kitty** e do **Zsh**.
+* **`pkglist.txt`**: Um arquivo de texto contendo todos os pacotes essenciais para o sistema.
+* **`install-arch.sh`**: Script que automatiza a leitura do `pkglist.txt`, instala um AUR helper e cria os links simbólicos necessários.
+
+---
+
+## 🐚 Shell (Zsh + Bash + Oh My Posh)
+
+### Zsh (Shell principal no Arch Linux)
+
+No Arch Linux, o **Zsh é utilizado como shell padrão**, com foco em produtividade e usabilidade.
+
+**Recursos configurados:**
+
+* Autocomplete avançado (`compinit`)
+* Histórico compartilhado e incremental
+* Autosuggestions
+* Syntax highlighting
+* Integração com `fzf`
+* Prompt customizado com **Oh My Posh**
+
+📁 Arquivos:
+
+* `~/.config/zsh/zshrc`
+* `~/.config/zsh/plugins.zsh`
+* Temas em `OMP/`
+
+Após clonar o repositório:
+
+```bash
+ln -sf ~/.config/zsh/zshrc ~/.zshrc
+chsh -s /bin/zsh
+```
+
+---
+
+### Bash (WSL / Fallback)
+
+O Bash continua presente para:
+
+* WSL / Ubuntu
+* Ambientes mínimos
+* Compatibilidade
+
+**Características:**
+
+* Portável
+* Usa `$HOME` em vez de caminhos fixos
+* Compartilha o mesmo tema do Oh My Posh (`amro.omp.json`)
+
+Arquivo:
+
+* `.bashrc`
 
 ---
 
@@ -66,29 +117,28 @@ Para obter o esquema de cores **Neon**, adicione o seguinte bloco ao seu arquivo
 
 ```json
 {
-    "background": "#000000",
-    "black": "#000000",
-    "blue": "#0208CB",
-    "brightBlack": "#686868",
-    "brightBlue": "#3C40CB",
-    "brightCyan": "#88FFFE",
-    "brightGreen": "#75FF88",
-    "brightPurple": "#F15BE5",
-    "brightRed": "#FF5A5A",
-    "brightWhite": "#FFFFFF",
-    "brightYellow": "#FFFD96",
-    "cursorColor": "#C7C7C7",
-    "cyan": "#00FFFC",
-    "foreground": "#00FFFC",
-    "green": "#5FFA74",
-    "name": "Neon",
-    "purple": "#F924E7",
-    "red": "#FF3045",
-    "selectionBackground": "#0013FF",
-    "white": "#C7C7C7",
-    "yellow": "#FFFC7E"
+  "name": "Neon",
+  "background": "#000000",
+  "foreground": "#00FFFC",
+  "cursorColor": "#C7C7C7",
+  "selectionBackground": "#0013FF",
+  "black": "#000000",
+  "red": "#FF3045",
+  "green": "#5FFA74",
+  "yellow": "#FFFC7E",
+  "blue": "#0208CB",
+  "purple": "#F924E7",
+  "cyan": "#00FFFC",
+  "white": "#C7C7C7",
+  "brightBlack": "#686868",
+  "brightRed": "#FF5A5A",
+  "brightGreen": "#75FF88",
+  "brightYellow": "#FFFD96",
+  "brightBlue": "#3C40CB",
+  "brightPurple": "#F15BE5",
+  "brightCyan": "#88FFFE",
+  "brightWhite": "#FFFFFF"
 }
-
 ```
 
 ---
@@ -97,26 +147,20 @@ Para obter o esquema de cores **Neon**, adicione o seguinte bloco ao seu arquivo
 
 ### Visual Studio Code
 
-* **Tema:** [Noctis Obscuro](https://marketplace.visualstudio.com/items?itemName=liviuschera.noctis)
-* **Links Simbólicos:** O script vincula automaticamente o `VScode/settings.json` para o diretório correto no WSL ou Linux Nativo.
+* **Tema:** Noctis Obscuro
+* **Links simbólicos:** Criados automaticamente pelos scripts
 
 ### Sublime Text
 
 * **Tema:** Osaka
-* **Localização:** Arquivos em `SublimeText/` devem ser linkados para `Packages/User`.
-
-### Shell (Bash + Oh My Posh)
-
-* **Portabilidade:** O `.bashrc` utiliza a variável `$HOME` em vez de caminhos fixos.
-* **Visual:** O tema padrão é o `amro.omp.json` dentro da pasta `OMP/`.
+* **Arquivos:** `SublimeText/ → Packages/User`
 
 ---
 
-## 📝 Backup Manual de Extensões
-
-Para reinstalar as extensões do VS Code manualmente:
+## 📝 Backup Manual de Extensões (VS Code)
 
 ```bash
 cat VScode/extensions.txt | xargs -n 1 code --install-extension
+```
 
 ```
