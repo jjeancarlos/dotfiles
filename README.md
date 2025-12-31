@@ -162,5 +162,3 @@ Para obter o esquema de cores **Neon**, adicione o seguinte bloco ao seu arquivo
 ```bash
 cat VScode/extensions.txt | xargs -n 1 code --install-extension
 ```
-
-```
