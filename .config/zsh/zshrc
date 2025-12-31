@@ -1,0 +1,38 @@
+# ~/.config/zsh/zshrc
+# Zsh setup - Arch Linux / Hyprland / Kitty
+
+# ---------- Autocomplete ----------
+autoload -Uz compinit
+compinit -d ~/.cache/zsh/zcompdump
+
+# ---------- History ----------
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+
+setopt share_history
+setopt hist_ignore_dups
+setopt hist_ignore_space
+setopt inc_append_history
+
+# ---------- Keybinds ----------
+bindkey -e
+bindkey '^[[A' history-search-backward
+bindkey '^[[B' history-search-forward
+
+# ---------- Aliases ----------
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
+
+# ---------- Environment ----------
+export TERM=xterm-256color
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.local/share/gem/ruby/3.4.0/bin:$PATH"
+
+# ---------- Oh My Posh ----------
+if command -v oh-my-posh &>/dev/null; then
+  eval "$(oh-my-posh init zsh --config ~/.config/omp/amro.omp.json)"
+fi
+
+# ---------- Plugins ----------
+[ -f ~/.config/zsh/plugins.zsh ] && source ~/.config/zsh/plugins.zsh
