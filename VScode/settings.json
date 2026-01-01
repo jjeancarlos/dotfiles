@@ -2,14 +2,22 @@
     "workbench.colorTheme": "Noctis Obscuro",
     "editor.wordWrap": "on",
     "files.autoSave": "afterDelay",
+    "editor.fontFamily": "'PlemolJP Console NF', 'Droid Sans Mono', 'monospace', 'Droid Sans Fallback'",
+    "editor.fontLigatures": true,
     "editor.formatOnSave": true,
     "editor.formatOnPaste": true,
-    "editor.defaultFormatter": "GitHub.copilot-chat",
+    "editor.defaultFormatter": null,
     "workbench.editor.autoLockGroups": {
         "workbench.editor.chatSession": false
     },
     "workbench.startupEditor": "none",
     "ruby.rubocop.useBundler": true,
     "ruby.interpreter.commandPath": "C:\\Ruby34-x64\\bin\\ruby.exe",
-    "ruby.bundlePath": "C:\\Ruby34-x64\\bin\\bundle.bat"
+    "ruby.bundlePath": "C:\\Ruby34-x64\\bin\\bundle.bat",
+    "workbench.secondarySideBar.defaultVisibility": "hidden",
+    "security.workspace.trust.banner": "never",
+    "security.workspace.trust.startupPrompt": "never",
+    "[html]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    }
 }
