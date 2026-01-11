@@ -1,6 +1,5 @@
-# ~/.config/zsh/zshrc
-# Zsh setup - Arch Linux / Hyprland / Kitty
-
+# Created by newuser for 5.9
+# Zsh básico
 # ---------- Autocomplete ----------
 autoload -Uz compinit
 compinit -d ~/.cache/zsh/zcompdump
@@ -15,7 +14,7 @@ setopt hist_ignore_dups
 setopt hist_ignore_space
 setopt inc_append_history
 
-# ---------- Keybinds ----------
+# ---------- key binds --------
 bindkey -e
 bindkey '^[[A' history-search-backward
 bindkey '^[[B' history-search-forward
@@ -26,13 +25,28 @@ alias grep='grep --color=auto'
 
 # ---------- Environment ----------
 export TERM=xterm-256color
-export PATH="$HOME/.local/bin:$PATH"
+export PATH="$PATH:$HOME/.local/bin"
 export PATH="$HOME/.local/share/gem/ruby/3.4.0/bin:$PATH"
 
 # ---------- Oh My Posh ----------
-if command -v oh-my-posh &>/dev/null; then
-  eval "$(oh-my-posh init zsh --config ~/.config/omp/amro.omp.json)"
-fi
+eval "$(oh-my-posh init zsh --config 'amro')"
 
-# ---------- Plugins ----------
-[ -f ~/.config/zsh/plugins.zsh ] && source ~/.config/zsh/plugins.zsh
+# ---------- Autosuggestions ----------
+ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+# ---------- fzf ----------
+[ -f /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh
+[ -f /usr/share/fzf/completion.zsh ] && source /usr/share/fzf/completion.zsh
+
+# ---------- Syntax Highlighting ----------
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# Home → início da linha
+bindkey "^[[H" beginning-of-line
+
+# End → fim da linha
+bindkey "^[[F" end-of-line
+
+# DEL → apaga toda a linha
+bindkey "^[[3~" kill-whole-line
