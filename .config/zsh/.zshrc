@@ -27,6 +27,7 @@ alias grep='grep --color=auto'
 export TERM=xterm-256color
 export PATH="$PATH:$HOME/.local/bin"
 export PATH="$HOME/.local/share/gem/ruby/3.4.0/bin:$PATH"
+export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 
 # ---------- Oh My Posh ----------
 eval "$(oh-my-posh init zsh --config 'amro')"
@@ -50,3 +51,7 @@ bindkey "^[[F" end-of-line
 
 # DEL → apaga toda a linha
 bindkey "^[[3~" kill-whole-line
+
+if ! ssh-add -l &>/dev/null; then
+    ssh-add ~/.ssh/id_ed25519
+fi
