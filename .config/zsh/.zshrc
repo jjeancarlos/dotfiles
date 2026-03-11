@@ -28,9 +28,10 @@ export TERM=xterm-256color
 export PATH="$PATH:$HOME/.local/bin"
 export PATH="$HOME/.local/share/gem/ruby/3.4.0/bin:$PATH"
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+export VIRTUAL_ENV_DISABLE_PROMPT=1
 
 # ---------- Oh My Posh ----------
-eval "$(oh-my-posh init zsh --config 'amro')"
+eval "$(oh-my-posh init zsh --config ~/.config/ohmyposh/amro.omp.json)"
 
 # ---------- Autosuggestions ----------
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
