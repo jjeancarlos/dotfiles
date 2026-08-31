@@ -65,6 +65,18 @@ export ANTHROPIC_API_KEY="sk-xxxxxxxxxxxx"
 export ANTHROPIC_BASE_URL="https://api.claude-web.dev"
 
 git-ai() {
+    local no_push=false
+
+    # Verifica se foi passada a flag --no-push
+    for arg in "$@"; do
+        case "$arg" in
+            --no-push)
+                no_push=true
+                shift
+                ;;
+        esac
+    done
+
     if ! git rev-parse --is-inside-work-tree &>/dev/null; then
         echo "❌ Você não está dentro de um repositório Git."
         return 1
@@ -80,13 +92,18 @@ git-ai() {
     echo
 
     local history
-    history=$(git log -20 --pretty=format:"%s" 2>/dev/null)
-
     local diff
-    diff=$(git diff --cached --no-ext-diff)
-
     local prompt
-    prompt=$(cat <<EOF
+    local message
+
+    # Detecta se é o primeiro commit
+    if ! git rev-parse HEAD &>/dev/null; then
+        message="chore: initial commit"
+    else
+        history=$(git log -20 --pretty=format:"%s" 2>/dev/null)
+        diff=$(git diff --cached --no-ext-diff)
+
+        prompt=$(cat <<EOF
 You are generating a Git commit message for the current repository.
 
 Analyze BOTH:
@@ -114,8 +131,8 @@ Your task:
 EOF
 )
 
-    local message
-    message=$(copilot -p "$prompt" -s 2>/dev/null)
+        message=$(copilot -p "$prompt" -s 2>/dev/null)
+    fi
 
     if [[ -z "$message" ]]; then
         echo "❌ Não foi possível gerar a mensagem."
@@ -141,11 +158,38 @@ EOF
     case "$confirm" in
         [Yy]|"")
             git commit -m "$message"
+
+            if [[ "$no_push" == false ]]; then
+                local branch
+                branch=$(git symbolic-ref --short HEAD)
+
+                if ! git rev-parse --abbrev-ref --symbolic-full-name @{u} &>/dev/null; then
+                    echo "🌐 Nenhum upstream configurado. Criando..."
+                    git push --set-upstream origin "$branch"
+                else
+                    git push
+                fi
+            else
+                echo "🚫 Push desativado (--no-push)."
+            fi
             ;;
         [Ee]|[Ee][Dd][Ii][Tt])
-            local edited
             vared -p "Mensagem: " -c message
             git commit -m "$message"
+
+            if [[ "$no_push" == false ]]; then
+                local branch
+                branch=$(git symbolic-ref --short HEAD)
+
+                if ! git rev-parse --abbrev-ref --symbolic-full-name @{u} &>/dev/null; then
+                    echo "🌐 Nenhum upstream configurado. Criando..."
+                    git push --set-upstream origin "$branch"
+                else
+                    git push
+                fi
+            else
+                echo "🚫 Push desativado (--no-push)."
+            fi
             ;;
         *)
             echo "❌ Commit cancelado."
