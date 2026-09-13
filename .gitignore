@@ -20,6 +20,7 @@ id_ed25519
 *~
 *.log
 *.bak
+!.config/hypr/hyprland.bak
 *.backup
 *.backup_*
 

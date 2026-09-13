@@ -76,6 +76,7 @@ hl.on("hyprland.start", function()
     -- hl.exec_cmd("/usr/bin/electron40 /usr/lib/vesktop/app.asar")
     hl.exec_cmd("piper -silent")
     -- hl.exec_cmd("linux-wallpaperengine --screen-root DP-3 3111326350 --scaling fill --fps 30 --assets-quality low --set-property showseconds=0 --silent &")
+    hl.exec_cmd("eval $(gnome-keyring-daemon --start --components=gpg,pkcs11,secrets,ssh)")
 end)
 
 -------------------------------
