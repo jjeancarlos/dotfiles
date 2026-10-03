@@ -38,7 +38,7 @@ hl.monitor({ output = "DP-1", mode = "1920x1080@240", position = "1080x0", scale
 
 -- Set programs that you use
 local screenshot = "hyprshot"
-local terminal = "kitty"
+local terminal = "kitty -e tmux new-session -A -s main"
 local fileManager = "dolphin"
 local menu = "rofi -show drun"
 local warp = "warp-terminal"
