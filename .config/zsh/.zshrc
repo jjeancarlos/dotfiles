@@ -13,6 +13,9 @@ setopt share_history
 setopt hist_ignore_dups
 setopt hist_ignore_space
 setopt inc_append_history
+setopt SHARE_HISTORY
+setopt HIST_FCNTL_LOCK
+setopt HIST_IGNORE_DUPS
 
 # ---------- key binds --------
 bindkey -e
