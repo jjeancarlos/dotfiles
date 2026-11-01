@@ -38,7 +38,7 @@ hl.monitor({ output = "DP-1", mode = "1920x1080@240", position = "1080x0", scale
 
 -- Set programs that you use
 local screenshot = "hyprshot"
-local terminal = "kitty -e tmux new-session -A -s main"
+local terminal = "kitty"
 local fileManager = "dolphin"
 local menu = "rofi -show drun"
 local warp = "warp-terminal"
@@ -65,7 +65,6 @@ hl.on("hyprland.start", function()
     hl.exec_cmd("wl-paste --type text --watch cliphist store --max-items 100") -- Stores only text data
     hl.exec_cmd("wl-paste --type text --watch-primary cliphist store")
     -- hl.exec_cmd("wl-paste --type image --watch cliphist store") -- Stores only image data
-    hl.exec_cmd("waybar")
     hl.exec_cmd("ratbagd")
     hl.exec_cmd("hyprpaper")
     hl.exec_cmd(os.getenv("HOME") .. "/.config/hypr/scripts/reset-portals.sh")
@@ -133,7 +132,7 @@ hl.config({
 
         -- https://wiki.hypr.land/Configuring/Basics/Variables/#variable-types for info about colors
         col = {
-            active_border = { colors = { "rgba(33ccffee)", "rgba(00ff99ee)" }, angle = 45 },
+            active_border = "rgba(ff1a1aee)",
             inactive_border = "rgba(595959aa)",
         },
 
@@ -195,7 +194,7 @@ hl.curve("elasticOut",     { type = "bezier", points = { { 0.34, 1.56 },   { 0.6
 -- =====================================================
 hl.animation({ leaf = "global",      enabled = true, speed = 2, bezier = "easeInOutCubic" })
 hl.animation({ leaf = "border",      enabled = true, speed = 3, bezier = "easeOutCubic" })
-hl.animation({ leaf = "borderangle", enabled = true, speed = 4, bezier = "easeInOutCubic", style = "loop" }) -- ⚠ VERIFICAR: "loop" como style ainda não confirmado na doc oficial da 0.56/0.57
+hl.animation({ leaf = "borderangle", enabled = false, speed = 4, bezier = "easeInOutCubic", style = "loop" }) -- desativado: borda estática (sem piscar/girar)
 
 -- =====================================================
 -- Janelas - cinematic open/close com popin + bounce
@@ -280,6 +279,13 @@ hl.config({
         vrr = 0,
 
         font_family = "Sans",
+    },
+})
+
+hl.config({
+    ecosystem = {
+        no_update_news = true,
+        no_donation_nag = true,
     },
 })
 
