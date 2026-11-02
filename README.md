@@ -23,6 +23,8 @@ dotfiles/
 ├── install-arch.sh      # Script de setup focado em Arch Linux
 ├── install.sh           # Script de setup focado em WSL/Ubuntu
 ├── pkglist.txt          # Lista consolidada de pacotes (Pacman/AUR)
+├── pkglist-official.txt # Pacotes explícitos dos repositórios oficiais
+├── pkglist-aur.txt      # Pacotes explícitos do AUR
 └── README.md            # Documentação do projeto
 ````
 
@@ -56,8 +58,9 @@ chmod +x install-arch.sh && ./install-arch.sh
 Adicionei suporte para uma instalação completa de ambiente gráfico baseado em **Wayland**:
 
 * **`.config/`**: Contém os arquivos de "rice" (estética). Aqui estão as definições de atalhos do **Hyprland**, o visual da **Waybar**, do terminal **Kitty** e do **Zsh**.
-* **`pkglist.txt`**: Um arquivo de texto contendo todos os pacotes essenciais para o sistema.
-* **`install-arch.sh`**: Script que automatiza a leitura do `pkglist.txt`, instala um AUR helper e cria os links simbólicos necessários.
+* **`pkglist.txt`**: Lista consolidada com todos os pacotes explícitos do sistema.
+* **`pkglist-official.txt`** / **`pkglist-aur.txt`**: Listas separadas usadas pelo instalador (pacotes oficiais e AUR).
+* **`install-arch.sh`**: Script que lê as listas separadas, instala os pacotes via `pacman`/`yay` e cria os links simbólicos necessários.
 
 ---
 
@@ -78,14 +81,15 @@ No Arch Linux, o **Zsh é utilizado como shell padrão**, com foco em produtivid
 
 📁 Arquivos:
 
-* `~/.config/zsh/zshrc`
+* `~/.config/zsh/.zshrc`
 * `~/.config/zsh/plugins.zsh`
 * Temas em `OMP/`
+* Credenciais locais: `~/.config/secrets.zsh` (permissão `600`, fora do Git)
 
 Após clonar o repositório:
 
 ```bash
-ln -sf ~/.config/zsh/zshrc ~/.zshrc
+ln -sf ~/.config/zsh/.zshrc ~/.zshrc
 chsh -s /bin/zsh
 ```
 

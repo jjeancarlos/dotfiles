@@ -4,6 +4,11 @@
 .bash_history
 .zsh_history
 .bash_profile_local
+.zshrc.local
+.config/secrets.zsh
+secrets.zsh
+secrets/
+*.token
 
 # Segurança Crítica (Fail-safe)
 .ssh/
@@ -26,8 +31,11 @@ id_ed25519
 
 # Credenciais e Variaveis de Ambiente
 .env
-.env.local
-.env.*.local
+.env.*
+!.env.example
+
+# Estado de aplicativos (não é configuração)
+.config/warp-terminal/user_preferences.json
 
 # IDE/Editor (Configurações de workspace locais)
 .vscode/

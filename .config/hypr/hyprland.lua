@@ -39,6 +39,7 @@ hl.monitor({ output = "DP-1", mode = "1920x1080@240", position = "1080x0", scale
 -- Set programs that you use
 local screenshot = "hyprshot"
 local terminal = "kitty"
+local termMain = terminal .. " -e " .. os.getenv("HOME") .. "/.config/hypr/scripts/tmux-main.sh"
 local fileManager = "dolphin"
 local menu = "rofi -show drun"
 local warp = "warp-terminal"
@@ -357,7 +358,7 @@ local mainMod = "SUPER" -- Sets "Windows" key as main modifier
 
 -- Example binds, see https://wiki.hypr.land/Configuring/Basics/Binds/ for more
 hl.bind(mainMod .. " + W", hl.dsp.exec_cmd(warp))
-hl.bind(mainMod .. " + Q", hl.dsp.exec_cmd(terminal .. " -e tmux new-session -A -s main"))
+hl.bind(mainMod .. " + Q", hl.dsp.exec_cmd(termMain))
 hl.bind(mainMod .. " + C", hl.dsp.window.close())
 hl.bind(mainMod .. " + M", hl.dsp.exit())
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))

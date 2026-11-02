@@ -1,10 +1,12 @@
 {
     "ignored_packages":
     [
-        "Vintage"
+        "Package Control",
+        "Vintage",
     ],
     "color_scheme": "osaka.sublime-color-scheme",
-    "index_files": true,
+    "index_files": false,
     "save_on_focus_lost": true,
-    "hot_exit": false
+    "hot_exit": false,
+    "font_size": 12,
 }

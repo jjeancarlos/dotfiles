@@ -1,111 +1,140 @@
 {
-    "layer": "top",
-    "position": "top",
-    "height": 34,
-    "spacing": 4,
-    "margin-top": 6,
-    "margin-left": 10,
-    "margin-right": 10,
-    
-    // Módulos da Esquerda
-    "modules-left": [
-        "hyprland/workspaces",
-        "hyprland/window"
-    ],
+  "layer": "top",
+  "position": "top",
+  "height": 34,
+  "spacing": 1,
+  "margin-top": 6,
+  "margin-left": 10,
+  "margin-right": 10,
 
-    // Módulos do Centro (Relógio em destaque)
-    "modules-center": [
-        "clock"
-    ],
+  // Módulos da Esquerda
+  "modules-left": ["hyprland/workspaces", "hyprland/window"],
 
-    // Módulos da Direita
-    "modules-right": [
-        "pulseaudio",
-        "network",
-        "cpu",
-        "memory",
-        "temperature",
-        "tray",
-        "custom/power"
-    ],
+  // Módulos do Centro (Relógio em destaque)
+  "modules-center": ["clock"],
 
-    // --- Configuração dos Módulos ---
+  // Módulos da Direita
+  "modules-right": [
+    "pulseaudio",
+    "network",
+    "cpu",
+    "memory",
+    //"mpris",
+    "temperature",
+    //"custom/spotify",
+    "tray",
+    "custom/power"
+  ],
 
-    "hyprland/workspaces": {
-        "disable-scroll": true,
-        "all-outputs": true,
-        "format": "{name}",
-        "on-click": "activate"
-    },
+  // --- Configuração dos Módulos ---
 
-    "hyprland/window": {
-        "format": "{title}",
-        "max-length": 100,
-        "separate-outputs": true
-    },
+  "hyprland/workspaces": {
+    "disable-scroll": true,
+    "all-outputs": true,
+    "format": "{name}",
+    "on-click": "activate"
+  },
 
-    "tray": {
-        "icon-size": 18,
-        "spacing": 10
-    },
+  "hyprland/window": {
+    "format": "{title}",
+    "max-length": 100,
+    "separate-outputs": true
+  },
 
-    "clock": {
-        "format": "{:%H:%M}  ",
-        "format-alt": "{:%A, %d %B, %Y}  ",
-        "tooltip-format": "<tt><small>{calendar}</small></tt>"
-    },
+  "tray": {
+    "icon-size": 18,
+    "spacing": 10
+  },
 
-    "cpu": {
-        "format": "{usage}% ",
-        "tooltip": true
-    },
+  "clock": {
+    "format": "{:%H:%M}  ",
+    "format-alt": "{:%A, %d %B, %Y}  ",
+    "tooltip-format": "<tt><small>{calendar}</small></tt>"
+  },
 
-    "memory": {
-        "format": "{}% "
-    },
+  "cpu": {
+    "format": "{usage}% ",
+    "tooltip": true
+  },
 
-    "temperature": {
-        "critical-threshold": 80,
-        "format": "{temperatureC}°C {icon}",
-        "format-icons": ["", "", ""]
-    },
+  "memory": {
+    "format": "{}% "
+  },
 
-    "pulseaudio": {
-        "format": "{volume}% {icon}",
-        "format-bluetooth": "{volume}% {icon}",
-        "format-muted": "Muted ",
-        "format-icons": {
-            "headphone": "",
-            "hands-free": "",
-            "headset": "",
-            "phone": "",
-            "portable": "",
-            "car": "",
-            "default": ["", "", ""]
-        },
-        "on-click": "pavucontrol"
-    },
+  "temperature": {
+    "critical-threshold": 80,
+    "format": "{temperatureC}°C {icon}",
+    "format-icons": ["", "", ""]
+  },
 
-    "custom/power": {
-        "format" : "⏻ ",
-        "tooltip": false,
-        "on-click": "nwg-bar" 
-        // Se não tiver wlogout, troque por "shutdown now" ou seu script de saida
-    },
-    
-    "network": {
-    "interface": "en*",  // Opcional: fixa em interfaces cabeadas (ex: enpXs0, eth0). Veja o nome exato com `ip link`
-    "format-wifi": "",   // Esconde completamente se por acaso detectar WiFi (não vai acontecer no seu caso)
-    "format-ethernet": "󰲁 ",  // Ícone moderno e bonito de rede cabeada (de Material Design Icons via Nerd Fonts)
+"pulseaudio": {
+  "format": "{volume}% {icon}",
+  "format-muted": "Muted ",
+  "tooltip-format": "{desc}",
+  "format-icons": {
+    "headphone": "",
+    "headset": "",
+    "hands-free": "",
+    "default": ["", "", ""]
+  },
+  "on-click": "pavucontrol",
+  "sink": "alsa_output.pci-0000_2d_00.4.analog-stereo"
+},
+
+  "custom/power": {
+    "format": "⏻ ",
+    "tooltip": false,
+    "on-click": "nwg-bar"
+    // Se não tiver wlogout, troque por "shutdown now" ou seu script de saida
+  },
+
+  "network": {
+    "interface": "enp37s0", // Opcional: fixa em interfaces cabeadas (ex: enpXs0, eth0). Veja o nome exato com `ip link`
+    "format-wifi": "", // Esconde completamente se por acaso detectar WiFi (não vai acontecer no seu caso)
+    "format-ethernet": "󰲁 ", // Ícone moderno e bonito de rede cabeada (de Material Design Icons via Nerd Fonts)
     // Alternativas de ícones (teste qual gosta mais):
     // "format-ethernet": " ",   // Ícone clássico de plug RJ45
     // "format-ethernet": "󰈀 ",   // Outro ícone de Ethernet conectado
     // "format-ethernet": "󰱔 ",   // Ícone verde de conexão
-    "format-linked": "󰌙 ",     // Cabo plugado mas sem IP (raro)
+    "format-linked": "󰌙 ", // Cabo plugado mas sem IP (raro)
     "format-disconnected": "󰲜 ", // Ícone de desconectado (ex: cabo solto)
     "format-disabled": "󰌐 ",
     "tooltip-format-ethernet": "Ethernet ({ifname})\nIP: {ipaddr}\n↓ {bandwidthDownBits} ↑ {bandwidthUpBits}",
     "tooltip-format-disconnected": "Desconectado",
-    "on-click": "nm-connection-editor"  // Abre o gerenciador de redes do NetworkManager
-    }
+    "on-click": "nm-connection-editor" // Abre o gerenciador de redes do NetworkManager
+  }
+  // "mpris": {
+  // "format": "{player_icon} {dynamic} - {title}",
+  // "format-paused": "{player_icon} ⏸ {dynamic} - {title}",
+  // "format-stopped": "",
+  // "max-length": 50,
+  // "player-icons": {
+  //     "brave": " ",
+  //     "brave.instance*": " ",
+  //     "default": " "
+  // },
+  // "status-icons": {
+  //     "playing": "▶",
+  //     "paused": "⏸",
+  //     "stopped": ""
+  // },
+  // "on-click": "playerctl --player=brave play-pause",
+  // "on-click-right": "playerctl --player=brave next",
+  // "on-click-middle": "playerctl --player=brave previous",
+  // "on-scroll-up": "playerctl --player=brave next",
+  // "on-scroll-down": "playerctl --player=brave previous",
+  // "tooltip-format": "{album} • {artist} • {position}/{length}"
+  // }
+  // "custom/spotify": {
+  // "exec": "~/.config/waybar/scripts/mediaplayer.py --player brave",
+  // "format": " {}   ◀◀   /   ▶▶",
+  // "return-type": "json",
+  // "on-click": "playerctl --player=brave play-pause",
+  // "on-click-right": "playerctl --player=brave next",
+  // "on-click-middle": "playerctl --player=brave previous",
+  // "on-scroll-up": "playerctl --player=brave next",
+  // "on-scroll-down": "playerctl --player=brave previous",
+  // "escape": true,
+  // "max-length": 80
+  // }
 }

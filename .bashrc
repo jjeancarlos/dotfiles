@@ -153,3 +153,7 @@ alias lua="lua5.4"
 if [ -f ~/.bashrc_local ]; then
     . ~/.bashrc_local
 fi
+
+if [ -r "$HOME/.config/secrets.zsh" ]; then
+    . "$HOME/.config/secrets.zsh"
+fi

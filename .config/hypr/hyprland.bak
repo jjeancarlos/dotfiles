@@ -22,8 +22,9 @@
 ################
 
 # See https://wiki.hypr.land/Configuring/Monitors/
-monitor=DP-3,1920x1080@240,0x0,1
 
+monitor=DP-2,1920x1080@144,0x0,1,transform,3
+monitor=DP-1,1920x1080@240,1080x0,1
 
 ###################
 ### MY PROGRAMS ###
@@ -55,6 +56,7 @@ exec-once = kbuildsycoca6
 exec-once = /usr/lib/polkit-kde-authentication-agent-1
 exec-once = gtk-launch brave-pjibgclleladliembfgfagdaldikeohf-Default
 exec-once = wl-paste --type text --watch cliphist store --max-items 100 # Stores only text data
+exec-once = wl-paste --type text --watch-primary cliphist store
 #exec-once = wl-paste --type image --watch cliphist store # Stores only image data
 exec-once = waybar
 exec-once = ratbagd
@@ -65,6 +67,7 @@ exec-once = ~/.config/hypr/scripts/ssh-add.sh
 exec-once = steam -silent
 exec-once = vesktop
 #exec-once = electron40 /usr/lib/vesktop/app.asar
+exec-once = piper -silent
 # exec-once = linux-wallpaperengine --screen-root DP-3 3111326350 --scaling fill --fps 30 --assets-quality low --set-property showseconds=0 --silent &
 
 #############################
@@ -83,10 +86,11 @@ env = XDG_SESSION_DESKTOP,Hyprland
 
 env = GDK_BACKEND,wayland,x11,*
 env = QT_QPA_PLATFORM,wayland;xcb
-env = QT_QPA_PLATFORMTHEME,qt5ct
+env = QT_QPA_PLATFORMTHEME,qt6ct
 env = QT_AUTO_SCREEN_SCALE_FACTOR,1
 env = QT_WAYLAND_DISABLE_WINDOWDECORATION,1
 env = XDG_MENU_PREFIX,arch-
+env = AQ_NO_MODIFIERS,1
 
 ###################
 ### PERMISSIONS ###
@@ -155,6 +159,7 @@ decoration {
         passes = 3           # Aumentado para um efeito acrílico mais suave
         vibrancy = 0.1696
         ignore_opacity = true # Garante que o blur apareça atrás de janelas transparentes
+        noise = 0.0
     }
     
 }
@@ -242,8 +247,7 @@ animations {
 
 # See https://wiki.hypr.land/Configuring/Dwindle-Layout/ for more
 dwindle {
-    pseudotile = true # Master switch for pseudotiling. Enabling is bound to mainMod + P in the keybinds section below
-    preserve_split = true # You probably want this
+    preserve_split = true
 }
 
 # See https://wiki.hypr.land/Configuring/Master-Layout/ for more
@@ -253,10 +257,27 @@ master {
 
 # https://wiki.hypr.land/Configuring/Variables/#misc
 misc {
-    force_default_wallpaper = 0 # Set to 0 or 1 to disable the anime mascot wallpapers
-    disable_hyprland_logo = true # If true disables the random hyprland logo / anime girl background. :(
+    force_default_wallpaper = 0
+    disable_hyprland_logo = true
+
     # Isso ajuda a evitar que o portal se perca entre sessões
     initial_workspace_tracking = 0
+
+    disable_splash_rendering = true
+
+    # Desativa o Variable Refresh Rate (FreeSync)
+    vrr = 0
+
+    font_family = Sans
+}
+
+debug {
+    # Variable Frame Rate
+    vfr = true
+}
+
+render {
+    cm_enabled = false
 }
 
 
@@ -319,7 +340,7 @@ bind = $mainMod, E, exec, $fileManager
 bind = $mainMod, K, togglefloating, 
 bind = $mainMod, R, exec, $menu
 bind = $mainMod, P, pseudo, # dwindle
-bind = $mainMod, J, togglesplit, # dwindle
+bind = $mainMod, J, layoutmsg, togglesplit
 bind = $mainMod, V, exec, cliphist list | rofi -dmenu -display-columns 2 | cliphist decode | wl-copy
 bind = $mainMod, Print, exec, $screenshot -m window
 bind = , Print, exec, $screenshot -m region
@@ -386,6 +407,24 @@ bindl = , XF86AudioPrev, exec, playerctl previous
 ### WINDOWS AND WORKSPACES ###
 ##############################
 
+# Monitor Vertical (Fixo e persistente)
+#workspace = 1, monitor:DP-2, persistent:true
+
+# Monitor Principal de 240Hz (O workspace 2 inicia aberto junto com o sistema)
+#workspace = 2, monitor:DP-1, persistent:true
+
+# Vincula o restante do teclado padrão para abrir sempre no DP-1
+workspace = 1, monitor:DP-1
+workspace = 2, monitor:DP-1
+workspace = 3, monitor:DP-1
+workspace = 4, monitor:DP-1
+workspace = 5, monitor:DP-1
+workspace = 6, monitor:DP-1
+workspace = 7, monitor:DP-1
+workspace = 8, monitor:DP-1
+workspace = 9, monitor:DP-1
+workspace = 10, monitor:DP-2
+
 # See https://wiki.hypr.land/Configuring/Window-Rules/ for more
 # See https://wiki.hypr.land/Configuring/Workspace-Rules/ for workspace rules
 
@@ -437,3 +476,4 @@ layerrule {
   blur = on
   ignore_alpha = 0.1
 }
+exec-once = dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP

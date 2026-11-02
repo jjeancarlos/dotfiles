@@ -7,17 +7,47 @@
     "editor.formatOnSave": true,
     "editor.formatOnPaste": true,
     "editor.defaultFormatter": null,
+
     "workbench.editor.autoLockGroups": {
         "workbench.editor.chatSession": false
     },
+
     "workbench.startupEditor": "none",
+
     "ruby.rubocop.useBundler": true,
     "ruby.interpreter.commandPath": "C:\\Ruby34-x64\\bin\\ruby.exe",
     "ruby.bundlePath": "C:\\Ruby34-x64\\bin\\bundle.bat",
+
     "workbench.secondarySideBar.defaultVisibility": "hidden",
+
     "security.workspace.trust.banner": "never",
     "security.workspace.trust.startupPrompt": "never",
+
     "[html]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
-    }
+    },
+
+    "claudeCode.disableLoginPrompt": true,
+    "claudeCode.preferredLocation": "panel",
+
+    "claudeCode.environmentVariables": [
+        {
+            "name": "ANTHROPIC_BASE_URL",
+            "value": "https://api.claude-web.dev"
+        },
+        {
+            "name": "ANTHROPIC_API_KEY",
+            "value": "sk-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+        }
+    ],
+    "yaml.disableSchemaDetection": [
+        "**/.github/workflows/*.yml",
+        "**/.github/workflows/*.yaml",
+        "**/.gitea/workflows/*.yml",
+        "**/.gitea/workflows/*.yaml",
+        "**/.forgejo/workflows/*.yml",
+        "**/.forgejo/workflows/*.yaml"
+    ],
+    "redhat.telemetry.enabled": true,
+    "workbench.editor.empty.hint": "hidden"
 }
